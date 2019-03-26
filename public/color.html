@@ -1,23 +1,5 @@
 <!DOCTYPE html>
 <html>
-        <script src="/socket.io/socket.io.js"></script>
-        <script>
-            let socket = io();
-
-            //default connect event
-            socket.on('connect', function() {
-                console.log("connected!");
-            });
-
-            socket.on('color_change', function(data) {
-                //create rgb color string for css
-                let colorStr = 'rgb(' + data.r + ',' + data.g + ',' + data.b + ')';
-                console.log("color received: " + colorStr);
-
-                //set background color with received color
-                document.body.style.backgroundColor = colorStr;
-            });
-        </script>
         <head>
                 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
                 <style>
@@ -43,7 +25,7 @@
                     }
         
                     p {
-                        color:darkgrey;
+                        color:black;
                         font-family: 'Quicksand', sans-serif;
                         font-weight: 300;
                         text-align:center;
@@ -53,9 +35,9 @@
             </head>
           <body>
                 <h1>ROCK, PAPER, SCISSORS</h1>
-                <h2>CLASSIC RULES</h2>
-                <h3>Rock beats Scissors | Scissors beats Paper | Paper beats Rcok</h3>
-                <p> Aim of the game: beat your oponent by selecting one of the below (rock, paper, or scissors)</p>
+                <h2>COLLABORATIVE</h2>
+                <h3>Pick a different colour than the one your teammate has sent you!</h3>
+                <p> Aim of the game: ???</p>
         
                 <!-- BUTTONS -->
                 <button id="red" style="background-color:rgb(255,0,0); color:white;"> <align="center"></align> <img src= "rock.png"> ROCK</button>
@@ -63,24 +45,49 @@
                 <button id="blue" style="background-color:rgb(0,0,255); color:white;"> <align="center"></align> <img src= "scissors.png">SCISSORS</button>
         
             
+                <script src="/socket.io/socket.io.js"></script>
                 <script>
                     let socket = io();
-        
+                    var counter = 0;
+
+
                     //default connect event
                     socket.on('connect', function() {
                         console.log("connected!");
                     });
-        
+                    /////////////////////////////////////////////////////////////////////////////////////////////
                     document.querySelector('#red').addEventListener('click', function() {
-                        socket.emit('red');
+                         socket.emit('red');
+                         alert("YOU ROCK!");
+                         counter++;
                     });
-        
                     document.querySelector('#green').addEventListener('click', function() {
                         socket.emit('green');
+                        alert("YOU CUT DOWN A TREE!");
+                        counter++;
                     });
-        
                     document.querySelector('#blue').addEventListener('click', function() {
                         socket.emit('blue');
+                        alert("SNIP SNIP!");
+                        counter++;
+                    });
+
+                if (counter = 5){
+
+
+                }
+                    ////////////////////////////////////////////////////////////////////////////////////////////
+                </script>
+        
+                <script>
+        
+                    socket.on('color_change', function(data) {
+                        //create rgb color string for css
+                        let colorStr = 'rgb(' + data.r + ',' + data.g + ',' + data.b + ')';
+                        console.log("color received: " + colorStr);
+        
+                        //set background color with received color
+                        document.body.style.backgroundColor = colorStr;
                     });
                 </script>
         </body>
