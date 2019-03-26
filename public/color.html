@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 <html>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            let socket = io();
+
+            //default connect event
+            socket.on('connect', function() {
+                console.log("connected!");
+            });
+
+            socket.on('color_change', function(data) {
+                //create rgb color string for css
+                let colorStr = 'rgb(' + data.r + ',' + data.g + ',' + data.b + ')';
+                console.log("color received: " + colorStr);
+
+                //set background color with received color
+                document.body.style.backgroundColor = colorStr;
+            });
+        </script>
+        
         <head>
                 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
                 <style>
