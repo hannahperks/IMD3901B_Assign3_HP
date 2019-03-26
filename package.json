@@ -1,7 +1,6 @@
 {
   "name": "websockets_lesson",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "dependencies": {
     "express": "^4.16.4",
@@ -20,5 +19,6 @@
   "bugs": {
     "url": "https://github.com/ProfScavarelli/Websockets_Lesson/issues"
   },
-  "homepage": "https://github.com/ProfScavarelli/Websockets_Lesson#readme"
+  "homepage": "https://github.com/ProfScavarelli/Websockets_Lesson#readme",
+  "description": ""
 }
