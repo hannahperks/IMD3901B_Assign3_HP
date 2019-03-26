@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
+        <style>
+            h1 {
+                color:black;
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 500;
+                text-align:center;
+            }
+             h2 {
+                color:black;
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 300;
+                text-align:center;
+            }
+             h3 {
+                color:black;
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 400;
+                text-align:center;
+            }
+            p {
+                color:black;
+                font-family: 'Quicksand', sans-serif;
+                font-weight: 300;
+                text-align:center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>ROCK, PAPER, SCISSORS</h1>
+        <h2>COMPETITIVE</h2>
+        <h3>Classic Game: the colour alerted on your screen is the colour of the icon your oponent selected.</h3>
+        <p> Aim of the game: ROCK beats SCISSORS | SCISSORS beats PAPER | PAPER beats ROCK </p>
+
+        <button id="red" style="background-color:rgb(255,0,0); color:black;"> <align="center"></align> <img src= "rock.png"> ROCK</button>
+        <button id="green" style="background-color:rgb(0,255,0); color:black;"> <align="center"></align> <img src= "paper.png">PAPER</button>
+        <button id="blue" style="background-color:rgb(0,0,255); color:black;"> <align="center"></align> <img src= "scissors.png">SCISSORS</button>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            let socket = io();
+            var counter = 0;
+
+
+            socket.on('connect', function() {
+                console.log("connected!");
+            });
+
+            document.querySelector('#red').addEventListener('click', function() {
+                socket.emit('red');
+                alert("YOU ROCK!");
+            });
+            document.querySelector('#green').addEventListener('click', function() {
+                socket.emit('green');
+                alert("YOU CUT DOWN A TREE!");
+            });
+            document.querySelector('#blue').addEventListener('click', function() {
+                socket.emit('blue');
+                alert("SNIP SNIP!");
+            });
+
+        </script>
+
+        <script>
+
+            socket.on('color_change', function(data) {
+                let colorStr = 'rgb(' + data.r + ',' + data.g + ',' + data.b + ')';
+                console.log("color received: " + colorStr);
+                document.body.style.backgroundColor = colorStr;
+            });
+        </script>
+    </body>
+</html> 
+
+
+
