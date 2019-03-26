@@ -33,7 +33,7 @@
         <h1>ROCK, PAPER, SCISSORS</h1>
         <h2>COLLABORATIVE</h2>
         <h3>Pick a different colour than the one your teammate has sent you!</h3>
-        <p> Aim of the game: ???</p>
+        <p> Aim of the game: Try to select 10 items as fast as possible with your teammate.</p>
 
         <!-- BUTTONS -->
         <button id="red" style="background-color:rgb(255,0,0); color:black;"> <align="center"></align> <img src= "rock.png"> ROCK</button>
@@ -51,6 +51,10 @@
                 console.log("connected!");
             });
             /////////////////////////////////////////////////////////////////////////////////////////////
+            if (counter == 1){
+                 Context_AF.initDate = new Date();
+                 document.querySelector('#timeTracker').components['time-component'].currentTime = Context_AF.initDate;
+             }
             document.querySelector('#red').addEventListener('click', function() {
                 socket.emit('red');
                 alert("YOU ROCK!");
@@ -67,10 +71,14 @@
                 counter++;
             });
 
-            if (counter = 5){
-
-
+            if (counter == 5){
+                var currentDate = new Date();
+                var pastDate = document.querySelector('#timeTracker').components['time-component'].currentTime;
+                var finalTime = currentDate - pastDate;
+                var timeSec = finalTime/1000;
             }
+
+            alert(timeSec);
             ////////////////////////////////////////////////////////////////////////////////////////////
         </script>
 
@@ -87,3 +95,6 @@
         </script>
     </body>
 </html> 
+
+
+
